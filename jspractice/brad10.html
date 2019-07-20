@@ -1,0 +1,39 @@
+<script>
+        function doCal(){
+
+            let op = document.getElementById("op");
+            console.log(op.selectedIndex);
+
+            let x = document.getElementById('x').value;
+            let y = document.getElementById('y').value;
+            x = parseInt(x); y = parseInt(y);
+            let r = '';
+
+            if (op.selectedIndex == 0){
+                // +
+                r = x + y;
+            }else if (op.selectedIndex == 1){
+                // -
+                r = x - y;
+            }else if (op.selectedIndex == 2){
+                // x
+                r = x * y;
+            }else if (op.selectedIndex == 3){
+                // /
+                let r1 = parseInt(x / y);
+                let r2 = x % y;
+                r = r1 + " ...... " + r2;
+            }
+            document.getElementById('result').innerHTML = r;
+        }
+    </script>
+    <input type="number" id="x">
+    <select id="op">
+        <option>+</option>
+        <option>-</option>
+        <option>x</option>
+        <option>/</option>
+    </select>
+    <input type="number" id="y">
+    <input type="button" value="=" onclick="doCal()">
+    <span id="result"></span>

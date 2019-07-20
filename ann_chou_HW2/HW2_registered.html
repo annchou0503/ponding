@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="bootstrap.min.css" rel="stylesheet">
+  <title>註冊立即中大獎</title>
+</head>
+<body>
+  <form 
+    class="form-horizontal"
+    name="winner"
+    onsubmit="return validateForm()"
+    method="post"
+    action=""
+  >
+    <fieldset>    
+      <!-- Form Name -->
+      <h1 style="text-align: center">註冊立即中大獎</h1>
+      
+      <!-- Text input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="name">姓名</label>  
+        <div class="col-md-4">
+          <input id="name" name="name" type="text" placeholder="" class="form-control input-md">       
+        </div>
+        <div id="warning_1"></div>
+      </div>
+      
+      <!-- Select Basic -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for=" income">年收入</label>
+        <div class="col-md-4">
+          <select id=" income" name=" income" class="form-control">
+            <option value="1">30~50萬</option>
+            <option value="2">50~100萬</option>
+            <option value="3">100~150萬</option>
+            <option value="4">150萬~200萬</option>
+            <option value="5">300萬以上</option>
+          </select>
+        </div>
+        <span id="warning_2"></span>
+      </div>
+      
+      <!-- Text input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="phone">手機號碼</label>  
+        <div class="col-md-4">
+          <input id="phone" name="phone" type="text" placeholder="" class="form-control input-md">
+        </div>
+        <span id="warning_3"></span>
+      </div>
+      
+      <!-- Button -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="submit"></label>
+        <div class="col-md-4">
+          <button id="submit" type="submit" class="btn btn-success">送出</button>
+        </div>
+      </div>
+    
+    </fieldset>
+  </form>
+<script>
+  function validateForm() {
+    var data=document.forms["winner"]["name"].value && document.forms["winner"]["phone"].value;
+    if (data==null || data=="") {
+      alert("資料填寫不完全");
+      return false;
+    } else {
+      alert("謝謝你的填寫");
+    }
+  }
+</script>
+</body>
+<style>
+  .btn-success{
+    width: 100%;
+  }
+</style>
+</html>

@@ -1,0 +1,27 @@
+<script>
+    function doThing(){
+        let year = document.getElementById('year').value;
+        year = parseInt(year);
+        let isOK;
+        if (year % 4 == 0){
+            if (year % 100 == 0){
+                if (year % 400 == 0){
+                    isOK = true;
+                }else{
+                    isOK = false;
+                }
+            }else{
+                isOK = true;
+            }
+        }else{
+            isOK = false;
+        }
+
+        document.getElementById("result").innerHTML =
+            isOK? '閏年' : '平年';
+    }
+</script>
+
+Year: <input type="number" id="year">
+<input type="button" value="是否閏年" onclick="doThing()"/>
+<span id="result"></span>
