@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>你知道有哪些是質數嗎？</title>
+<h1>你知道有哪些是質數嗎？</h1>
+</head>
+
+<body>
+  <div>
+    <table border="1" id="content" width="100%" class="tb-style"></table>
+  </div>
+</body>
+
+<script>  
+  var primes = [];
+  var showHtml = '';
+  showHtml += "<tr>";
+
+  for (i=1; i<=100; i++){
+    let isPrime = true;
+    // 找質數 (除了1以及自己本身之外,不能被整除的數)
+    for (k=2; k<=100; k++){
+      if( i%k == 0 && k != i ){ //如果i可以被整除的話,而且k不是i 就不是質數
+        isPrime = false;
+      }
+    }
+
+    // 打印
+    if(isPrime && i > 1){
+      showHtml += "<td class='primes' >"+i+"</td>";
+    }else{
+      showHtml +=  "<td>"+i+"</td>";
+    }
+
+    // 換行
+    if(i%100 == 0){
+      showHtml += "</tr>";            
+    }else if(i%10 == 0) {
+      showHtml += "</tr>"+"<tr>"; 
+    }
+  }
+
+  // 所有的質數
+  console.log(primes);
+
+  document.getElementById("content").innerHTML= showHtml;
+</script>
+
+<style>
+.tb-style {
+  background-color:gray;
+  color: aliceblue;
+  text-align: center;
+  border: 1px;
+  border-collapse:collapse;
+}
+
+td {
+  height: 30px;
+}
+
+.primes {
+  background-color: #EE0550;
+}
+</style>
+
+</html>
