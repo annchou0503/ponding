@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="bootstrap.min.css" rel="stylesheet">
+  <title>身份證字號產生器</title>
+</head>
+<body>
+<form class="form-horizontal">
+  <fieldset>
+    <legend style="text-align: center">身份證字號產生器</legend>
+    <!-- Multiple Radios -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="gender">請選擇性別</label>
+      <div class="col-md-4">
+        <div class="radio">
+          <label>
+            <input type="radio" name="gender" id="gender_1" value="1" checked="checked">
+            男性
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" name="gender" id="gender_2" value="2">
+            女性
+          </label>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Select Basic -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="location">請選擇縣市</label>
+      <div class="col-md-4">
+        <select id="area" name="area" class="form-control">
+          <option value="A10">臺北市</option>
+          <option value="B11">臺中市</option>
+          <option value="C12">基隆市</option>
+          <option value="D13">臺南市</option>
+          <option value="E14">高雄市</option>
+          <option value="F15">新北市</option>
+          <option value="G16">宜蘭縣</option>
+          <option value="H17">桃園市</option>
+          <option value="I34">嘉義市</option>
+          <option value="J18">新竹縣</option>
+          <option value="K19">苗栗縣</option>
+          <option value="M21">南投縣</option>
+          <option value="N22">彰化縣</option>
+          <option value="O35">新竹市</option>
+          <option value="P23">雲林縣</option>
+          <option value="Q24">嘉義縣</option>
+          <option value="T27">屏東縣</option>
+          <option value="U28">花蓮縣</option>
+          <option value="V29">臺東縣</option>
+          <option value="W32">金門縣</option>
+          <option value="X30">澎湖縣</option>
+          <option value="Z33">連江縣</option>
+          <option value="L20">臺中縣</option>
+          <option value="R25">臺南縣</option>
+          <option value="S26">高雄縣</option>
+          <option value="Y31">陽明山管理局</option>
+        </select>
+      </div>        
+    </div>
+    
+    <!-- Button -->
+    <div class="form-group">
+      <label class="col-md-4 control-label"></label>
+      <div class="col-md-4">
+        <div id="start" name="start" class="btn btn-primary" onclick="creatTWIDByAll()">產生</div>
+      </div>
+    </div>
+
+    
+  </fieldset>
+</form>
+<!-- 身分證字號產生 -->
+<div class="col-md-12 showID" id="idArea"></div>
+  
+</body>
+<script>
+  function creatTWIDByAll() {
+    let idArea = document.getElementById('idArea');
+    let gender = document.getElementsByName('gender');
+    let male = gender[0].checked;
+    let female = gender[1].checked;
+    let num = parseInt(Math.random()*100000000).toString();
+    let area = document.getElementById('area')
+    let n0 = area.value.substr(0,1);
+    let n1 = area.value.substr(1,1);
+    let n2 = area.value.substr(2,1);
+
+    let n4 = parseInt(num.substr(0,1));
+    let n5 = parseInt(num.substr(1,1));
+    let n6 = parseInt(num.substr(2,1));
+    let n7 = parseInt(num.substr(3,1));
+    let n8 = parseInt(num.substr(4,1));
+    let n9 = parseInt(num.substr(5,1));
+    let n10 = parseInt(num.substr(6,1));
+    let n11 = parseInt(num.substr(7,1));
+  
+    let n3 ='';
+    if (male == true) {
+      n3 = 1;
+    } else {
+      n3 = 2;
+    }
+
+    let sum = n1*1 + n2*9 + n3*8 + n4*7 + n5*6 + n6*5 + n7*4 + n8*3 + n9*2 + n10*1 + n11*1;
+        
+    n11 = n11 - sum%10;
+    if (n11 < 0) {
+      n11 = n11 +10;
+    }
+    showID = `${n0}${n3}${n4}${n5}${n6}${n7}${n8}${n9}${n10}${n11}`;
+
+    sum = n1*1 + n2*9 + n3*8 + n4*7 + n5*6 +
+        n6*5 + n7*4 + n8*3 + n9*2 + n10*1 + n11*1;
+    if (sum%10 == 0){
+      idArea.innerHTML = showID; 
+    }
+  }
+  
+</script>
+<style>
+.showID {
+  text-align: center;
+  font-size: 25px;
+}
+</style>
+</html>
