@@ -1,0 +1,100 @@
+<script src="guess.js"></script>
+<script>
+  let selsctNum = document.getElementById('selsctNum');
+  let d = 3;
+  let answer = createAnswer(d);
+  console.log(answer);
+  let logtext = '';
+  let times = 0;
+
+  //更改謎底位數
+  function changeLen(val){
+    d = val;
+    answer = createAnswer(val);
+    console.log(answer);
+  } 
+  
+  function doGuess(){
+    times++;
+    let guess = document.getElementById('input').value;
+    let result = checkAB(answer, guess);
+    let isrepeat = false;
+
+    isrepeat = checkNum(guess);
+
+    if (guess == ''){
+      alert("請輸入數字");
+      times--;
+      return false;
+    } else if (guess.length != d) {
+      alert(`請輸入${d}位數`);
+      times--;
+      return false;
+    } else if (!isrepeat){
+      alert("數字不得重複");
+      times--;
+      return false;
+    }
+    alert(`${guess} => ${result}`);
+    logtext += `${times} : ${guess} => ${result}<br>`;
+    document.getElementById('log').innerHTML = logtext;
+    document.getElementById('input').value = '';
+
+    if (result == `${d}A0B`){
+        alert('恭喜答對了');
+        replay();
+    }else if(times == 3){
+        alert(`輸了！答案是：${answer}`);
+        replay();
+    }
+    document.getElementById('input').focus();
+  }
+
+  function checkNum(guess){
+    
+    let guessStatus = false;
+
+    let guessArray = guess.split("");
+
+    var result = new Set();
+    var repeat = new Set();
+
+    guessArray.forEach(item => {
+      result.has(item) ? repeat.add(item) : result.add(item);
+    });
+
+    // 沒有重複值
+    if(repeat.size == 0){
+      guessStatus = true;
+    }
+
+    return guessStatus;
+  }
+
+
+  function replay(){
+    answer = createAnswer(d);
+    logtext = '';
+    times = 0;
+    document.getElementById('log').innerHTML = '';
+    document.getElementById('input').value = '';
+    document.getElementById('input').focus();
+  }
+</script>
+
+<h1>這是一個猜數字遊戲</h1>
+<hr>
+<div>
+<span>數字長度為</span>
+<select id="selsctNum" onchange="changeLen(this.value)">
+  <option value="2">2位數</option>
+  <option value="3" selected>3位數</option>
+  <option value="4">4位數</option>
+</select>
+</div>
+<input type="number" id='input' placeholder="請輸入數字"/>
+<input type="button" value="猜猜看" onclick="doGuess()"/>
+<input type="button" value="重玩一次" onclick="replay()" />
+
+<hr>
+<div id="log"></div>
